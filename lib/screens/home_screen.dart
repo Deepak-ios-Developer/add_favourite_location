@@ -157,7 +157,6 @@ class _SmoothHomeScreenState extends State<SmoothHomeScreen>
   int _currentIndex = 0;
   late PageController _pageController;
   late AnimationController _indicatorController;
-  late Animation<double> _indicatorAnimation;
 
   final List<Widget> _pages = [
     AddLocationView(),
@@ -189,13 +188,6 @@ class _SmoothHomeScreenState extends State<SmoothHomeScreen>
       vsync: this,
     );
     
-    _indicatorAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _indicatorController,
-      curve: Curves.easeInOutCubic,
-    ));
     
     _indicatorController.forward();
   }
