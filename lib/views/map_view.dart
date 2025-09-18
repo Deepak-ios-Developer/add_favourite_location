@@ -109,48 +109,57 @@ class _MapViewState extends State<MapView> {
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) => Container(
-              height: 300,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      'Favorite Locations',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            FloatingActionButton.extended(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => Container(
+                    height: 300,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            'Favorite Locations',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: widget.locations.length,
+                            itemBuilder: (context, index) {
+                              final location = widget.locations[index];
+                              return ListTile(
+                                leading:
+                                    Icon(Icons.location_on, color: Colors.blue),
+                                title: Text(location.name),
+                                subtitle: Text(location.description),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  _goToLocation(location);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: widget.locations.length,
-                      itemBuilder: (context, index) {
-                        final location = widget.locations[index];
-                        return ListTile(
-                          leading: Icon(Icons.location_on, color: Colors.blue),
-                          title: Text(location.name),
-                          subtitle: Text(location.description),
-                          onTap: () {
-                            Navigator.pop(context);
-                            _goToLocation(location);
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
+                );
+              },
+              icon: Icon(Icons.list),
+              label: Text('Locations'),
             ),
-          );
-        },
-        icon: Icon(Icons.list),
-        label: Text('Locations'),
+          ],
+        ),
       ),
     );
   }

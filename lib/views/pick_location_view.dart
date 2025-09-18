@@ -46,7 +46,8 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
 
     if (permission == LocationPermission.deniedForever) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Location permission permanently denied.")),
+        const SnackBar(
+            content: Text("Location permission permanently denied.")),
       );
       return;
     }
@@ -62,8 +63,7 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
     });
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-  }
+  void _onMapCreated(GoogleMapController controller) {}
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +87,12 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
                 ),
-                const Center(
-                  child: Icon(Icons.location_pin, size: 50, color: Colors.red),
+                Center(
+                  child: Image.asset(
+                    "lib/assets/pin.png", // path to your pin
+                    width: 50,
+                    height: 50,
+                  ),
                 ),
                 Positioned(
                   bottom: 20,
@@ -106,4 +110,3 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
     );
   }
 }
-
